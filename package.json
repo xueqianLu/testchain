@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@msgpack/msgpack": "^3.0.0-beta2",
+    "bcrypto": "^5.4.0",
+    "crypto": "^1.0.1",
+    "msgpack": "^1.0.3",
+    "request": "^2.88.2",
+    "sm-crypto": "^0.3.13"
+  }
+}
