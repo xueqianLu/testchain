@@ -8,8 +8,8 @@ const curTimestamp = date.getTime()
 const userid = 1002
 const key = "41ad9302dc133e8ec01292b0227c45d90944bd9e8f754d5cbf9cc40a00db8633"
 const pubkey = "04e583f6ccf91f0ee6d6c05930a8130b7dca219dacb054786753e7659440f47eeb73907e10e8afc06e916254e673c762740cc46c9cee1aefd97c3d8f2f5182b8a0"
-
-const msg = "this is test cipher tx 7."
+const pubkey_friend = "04be6d0c6cdd5519757c274a16a21cd723e4041fd48f31bd26de9d2ece8641363db366dc6d90caebabb0c36e0c76b48d40fd65709839293e7d26eacea4b298f015"
+const msg = "this cipher is for me and my friend for add acl-2."
 const tdh2pubkey = "{\"Group\":\"P256\",\"G_bar\":\"BOO26Sw3tRlN1xaaA2X90DBFTDGU95nfZTcv8CTUHHEOMkoa2AW1UZQFfH94Kyjus6qj+b8XzEq0B0T1WuGzzUQ=\",\"H\":\"BByFt5mg+YAiYEpFPC5EeEmgS+r2hdZ1Gmp9MZNtOtHjlPqkwbQjn67gmjNfUpY5C98hBMOhrjddH1Ig90ND/vE=\",\"HArray\":[\"BByFt5mg+YAiYEpFPC5EeEmgS+r2hdZ1Gmp9MZNtOtHjlPqkwbQjn67gmjNfUpY5C98hBMOhrjddH1Ig90ND/vE=\",\"BByFt5mg+YAiYEpFPC5EeEmgS+r2hdZ1Gmp9MZNtOtHjlPqkwbQjn67gmjNfUpY5C98hBMOhrjddH1Ig90ND/vE=\",\"BByFt5mg+YAiYEpFPC5EeEmgS+r2hdZ1Gmp9MZNtOtHjlPqkwbQjn67gmjNfUpY5C98hBMOhrjddH1Ig90ND/vE=\",\"BByFt5mg+YAiYEpFPC5EeEmgS+r2hdZ1Gmp9MZNtOtHjlPqkwbQjn67gmjNfUpY5C98hBMOhrjddH1Ig90ND/vE=\"]}"
 
 var pub = JSON.parse(tdh2pubkey)
@@ -22,11 +22,13 @@ const WriteInfo = {
     UserID: userid,
     Info: result.jsonString,
     Hash: hash_C_str,
-    Acl: [pubkey,]
+    Acl: [pubkey,],
+    // Acl: [pubkey, pubkey_friend]
 }
 
 const winfoData = msgpack.encode(WriteInfo)
-const uid = hash_C_str
+const uid = userid.toString()
+console.log("uid: " + uid)
 
 const wreq = { WType: 1, UID: uid, OP: Buffer.from(winfoData) }
 
@@ -39,7 +41,7 @@ const clientReq = {
     TS: curTimestamp,
 }
 const clientReqData = msgpack.encode(clientReq)
-const signature = sm2.sign(clientReqData, key)
+const signature = sm2.sign(Array.prototype.slice.call(clientReqData), key)
 const baseReqData = Buffer.from(clientReqData).toString('base64')
 const baseSignature = Buffer.from(signature, 'HEX').toString('base64')
 
@@ -55,7 +57,8 @@ const form = {
 }
 
 request.post(
-    'http://127.0.0.1:11010/chainBrowser/user/usertx/writeCipher', { json: form },
+    // 'http://127.0.0.1:11010/chainBrowser/user/usertx/writeCipher', { json: form },
+    'http://52.221.177.10:11010/chainBrowser/user/usertx/writeCipher', { json: form },
     function (error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log(body)
