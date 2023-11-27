@@ -10,7 +10,7 @@ const key = "41ad9302dc133e8ec01292b0227c45d90944bd9e8f754d5cbf9cc40a00db8633"
 const pubkey = "04e583f6ccf91f0ee6d6c05930a8130b7dca219dacb054786753e7659440f47eeb73907e10e8afc06e916254e673c762740cc46c9cee1aefd97c3d8f2f5182b8a0"
 // userid 1003 pubkey
 const pubkey_friend = "04be6d0c6cdd5519757c274a16a21cd723e4041fd48f31bd26de9d2ece8641363db366dc6d90caebabb0c36e0c76b48d40fd65709839293e7d26eacea4b298f015"
-const txid = ""
+const txid = "71a3c15b582fb018095162d76bbed3193bd33fc7ae3bae5599c9d9dfcc58be33"
 const WriteInfo = {
     UserID: userid,
     Txid: txid,
@@ -20,7 +20,7 @@ const WriteInfo = {
 const winfoData = msgpack.encode(WriteInfo)
 const aa = msgpack.decode(winfoData)
 
-const uid = userid.toString('hex')
+const uid = userid.toString()
 const wreq = { WType: 3, UID: uid, OP: winfoData }
 const wreqData = msgpack.encode(wreq)
 

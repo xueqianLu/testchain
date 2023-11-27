@@ -14,7 +14,7 @@ const pubkey = "04be6d0c6cdd5519757c274a16a21cd723e4041fd48f31bd26de9d2ece864136
 const tdh2pubkey = "{\"Group\":\"P256\",\"G_bar\":\"BOO26Sw3tRlN1xaaA2X90DBFTDGU95nfZTcv8CTUHHEOMkoa2AW1UZQFfH94Kyjus6qj+b8XzEq0B0T1WuGzzUQ=\",\"H\":\"BByFt5mg+YAiYEpFPC5EeEmgS+r2hdZ1Gmp9MZNtOtHjlPqkwbQjn67gmjNfUpY5C98hBMOhrjddH1Ig90ND/vE=\",\"HArray\":[\"BByFt5mg+YAiYEpFPC5EeEmgS+r2hdZ1Gmp9MZNtOtHjlPqkwbQjn67gmjNfUpY5C98hBMOhrjddH1Ig90ND/vE=\",\"BByFt5mg+YAiYEpFPC5EeEmgS+r2hdZ1Gmp9MZNtOtHjlPqkwbQjn67gmjNfUpY5C98hBMOhrjddH1Ig90ND/vE=\",\"BByFt5mg+YAiYEpFPC5EeEmgS+r2hdZ1Gmp9MZNtOtHjlPqkwbQjn67gmjNfUpY5C98hBMOhrjddH1Ig90ND/vE=\",\"BByFt5mg+YAiYEpFPC5EeEmgS+r2hdZ1Gmp9MZNtOtHjlPqkwbQjn67gmjNfUpY5C98hBMOhrjddH1Ig90ND/vE=\"]}"
 
 var pub = JSON.parse(tdh2pubkey)
-const txid = "1074ce71a9cfe4b5e80ebd50b58128a4e17149a49c6d432f677dfa33599dc033"
+const txid = "71a3c15b582fb018095162d76bbed3193bd33fc7ae3bae5599c9d9dfcc58be33"
 const readInfo = {
     RType: "4",
     TS: curTimestamp,
@@ -43,7 +43,8 @@ const form = {
 }
 
 request.post(
-    'http://127.0.0.1:11010/chainBrowser/user/usertx/readCipher', { json: form },
+    //'http://127.0.0.1:11010/chainBrowser/user/usertx/readCipher', { json: form },
+    'http://52.221.177.10:11010/chainBrowser/user/usertx/readCipher', { json: form },
     function (error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log(body)
